@@ -16,7 +16,6 @@ class ViewController: UIViewController {
         case Multiply = "*"
         case Subtract = "-"
         case Add = "+"
-        case Equals = "="
         case Empty = "Empty"
     }
     
@@ -29,6 +28,7 @@ class ViewController: UIViewController {
     var runningNumber = ""
     var leftValStr = ""
     var rightValStr = ""
+    var result = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,14 +90,46 @@ class ViewController: UIViewController {
     
     
     @IBAction func onEqualPressed(sender: AnyObject) {
-        processOperation(Operation.Equals)
+        processOperation(currentOperation)
 
     }
     
     func processOperation(op: Operation) {
-        
+
+        print("Operation is \(currentOperation)")
+       
         if currentOperation != Operation.Empty {
                 //do some math
+            
+            if runningNumber != "" {
+                
+         
+                rightValStr = runningNumber
+                print("left value string is " + leftValStr)
+                print("right value string is " + rightValStr)
+                
+                runningNumber = ""
+                
+                if currentOperation == Operation.Multiply {
+                    result = "\(Double(leftValStr)! * Double(rightValStr)!)"
+                }
+                else if currentOperation == Operation.Divide {
+                    result = "\(Double(leftValStr)! / Double(rightValStr)!)"
+                    
+                }
+                else if currentOperation == Operation.Add {
+                    result = "\(Double(leftValStr)! + Double(rightValStr)!)"
+                }
+                else if currentOperation == Operation.Subtract {
+                    result = "\(Double(leftValStr)! - Double(rightValStr)!)"
+                }
+                
+                leftValStr = result
+                outputLabel.text = result
+              
+            }
+            
+            currentOperation = op
         }
         else {
             //first time
