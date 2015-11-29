@@ -133,6 +133,7 @@ class ViewController: UIViewController {
         }
         else {
             //first time
+            
             print("Operation is empty - first time")
             leftValStr = runningNumber
             runningNumber = ""
